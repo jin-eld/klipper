@@ -1,0 +1,2 @@
+include klippy/extras/display/menu.cfg
+include klippy/extras/display/display.cfg

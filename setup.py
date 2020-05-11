@@ -21,6 +21,7 @@ setup(
     version = '0.8.0+git',
     description = 'Klipper 3D Printing Firmware',
     packages=find_packages(),
+    include_package_data = True,
     entry_points = { "console_scripts": [ "klippy = klippy.klippy:main" ] },
     url = "https://www.klipper3d.org/",
     ext_modules = [ c_helper ]
