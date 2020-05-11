@@ -4,7 +4,7 @@
 #
 # This file may be distributed under the terms of the GNU GPLv3 license.
 import math, logging
-import stepper, homing, chelper
+from klippy import stepper, homing, chelper
 
 class PrinterExtruder:
     def __init__(self, config, extruder_num):

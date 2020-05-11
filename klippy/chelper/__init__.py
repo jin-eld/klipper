@@ -162,20 +162,6 @@ def get_mtimes(srcdir, filelist):
         out.append(t)
     return out
 
-# Check if the code needs to be compiled
-def check_build_code(srcdir, target, sources, cmd, other_files=[]):
-    src_times = get_mtimes(srcdir, sources + other_files)
-    obj_times = get_mtimes(srcdir, [target])
-    if not obj_times or max(src_times) > min(obj_times):
-        logging.info("Building C code module %s", target)
-        srcfiles = [os.path.join(srcdir, fname) for fname in sources]
-        destlib = os.path.join(srcdir, target)
-        res = os.system(cmd % (destlib, ' '.join(srcfiles)))
-        if res:
-            msg = "Unable to build C code module (error=%s)" % (res,)
-            logging.error(msg)
-            raise Exception(msg)
-
 FFI_main = None
 FFI_lib = None
 pyhelper_logging_callback = None
@@ -185,8 +171,6 @@ def get_ffi():
     global FFI_main, FFI_lib, pyhelper_logging_callback
     if FFI_lib is None:
         srcdir = os.path.dirname(os.path.realpath(__file__))
-        check_build_code(srcdir, DEST_LIB, SOURCE_FILES, COMPILE_CMD
-                         , OTHER_FILES)
         FFI_main = cffi.FFI()
         for d in defs_all:
             FFI_main.cdef(d)
@@ -213,7 +197,6 @@ HC_CMD = "sudo %s/hub-ctrl -h 0 -P 2 -p %d"
 def run_hub_ctrl(enable_power):
     srcdir = os.path.dirname(os.path.realpath(__file__))
     hubdir = os.path.join(srcdir, HC_SOURCE_DIR)
-    check_build_code(hubdir, HC_TARGET, HC_SOURCE_FILES, HC_COMPILE_CMD)
     os.system(HC_CMD % (hubdir, enable_power))
 
 

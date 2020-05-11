@@ -4,7 +4,7 @@
 #
 # This file may be distributed under the terms of the GNU GPLv3 license.
 import logging, math
-import stepper, homing
+from klippy import stepper, homing
 
 class CoreXYKinematics:
     def __init__(self, toolhead, config):

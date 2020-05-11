@@ -106,7 +106,7 @@ class Printer:
             if default is not configfile.sentinel:
                 return default
             raise self.config_error("Unable to load module '%s'" % (section,))
-        mod = importlib.import_module('extras.' + module_name)
+        mod = importlib.import_module('klippy.extras.' + module_name)
         init_func = 'load_config'
         if len(module_parts) > 1:
             init_func = 'load_config_prefix'

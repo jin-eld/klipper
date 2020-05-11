@@ -5,7 +5,8 @@
 #
 # This file may be distributed under the terms of the GNU GPLv3 license.
 import logging
-import icons, font8x14, extras.bus
+import icons, font8x14
+from klippy.extras import bus
 
 BACKGROUND_PRIORITY_CLOCK = 0x7fffffff00000000
 
